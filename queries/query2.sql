@@ -1,0 +1,2 @@
+-- This query calculates the percent change across each week in the year and averages this change across the years for a specific currency.
+-- The resulting table ranks which weeks most consistent see an increase in exchange rate and the average percent change that week.

@@ -1,0 +1,2 @@
+-- This query finds the most "stable" currency which is defined with the currency that experienced the least amount
+-- of change in exchange rate day to day compared to other currencies.
