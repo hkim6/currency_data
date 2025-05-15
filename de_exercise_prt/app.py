@@ -1,11 +1,11 @@
 import boto3
 import csv
-import os
 import traceback
 import psycopg2
 from sql_utils import get_db_connection, check_ddl
 import io
 from datetime import datetime
+
 
 def lambda_handler(event, context):
     conn = get_db_connection()
@@ -37,8 +37,10 @@ def lambda_handler(event, context):
     s3 = boto3.client("s3", region_name="us-east-2")
     bucket_name = f"the-bucket-de-exercise"
     cur_time = datetime.now().isoformat()
-    
+
     s3.put_object(
-        Bucket=bucket_name, Key=f"{cur_time.split('T')[0]}.csv", Body=csv_buffer.getvalue()
+        Bucket=bucket_name,
+        Key=f"{cur_time.split('T')[0]}.csv",
+        Body=csv_buffer.getvalue(),
     )
     return {"statusCode": 200, "body": "Done"}
