@@ -1,5 +1,6 @@
 .ruff*
 *__pycache__*
+*.env*
 
 #terraform
 *.terraform*
