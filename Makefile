@@ -50,4 +50,11 @@ load_data:
 	@echo "Loading data"
 	poetry run python ./de_exercise_prt/currency_ingestion.py ingest_csv ./data/daily_forex_rates.csv
 
-	
+build_image:
+	@echo "Building Docker image"
+	docker build --platform linux/arm64 -t de-exercise-image .
+	docker tag de-exercise-image:latest ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/hk-repo
+
+push_image:
+	aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/hk-repo
+	docker push ${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/hk-repo

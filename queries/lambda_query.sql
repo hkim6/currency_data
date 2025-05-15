@@ -19,7 +19,7 @@ increases as (
             ELSE 0
         END as rate_change
     from previous_rates
-    where rate_date > '2022-01-01'
+    where rate_date::timestamp > CURRENT_TIMESTAMP - interval '1 day'
 ),
 -- Create a new column that contains a running sum that incremennts when the exchange_rate didn't change
 previous_changes as (

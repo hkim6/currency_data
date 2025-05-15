@@ -69,7 +69,12 @@ def get_currency_data(
         return None
 
     records = [
-        {"rate_date": date, "base_currecy_symbol": "USD", "currency_symbol": currency, "exchange_rate": rate}
+        {
+            "rate_date": date,
+            "base_currency_symbol": "USD",
+            "currency_symbol": currency,
+            "exchange_rate": rate,
+        }
         for date, currencies in rates.items()
         for currency, rate in currencies.items()
     ]

@@ -4,6 +4,7 @@ import traceback
 import psycopg2
 import click
 import sqlalchemy
+import csv
 from tabulate import tabulate
 
 
@@ -66,21 +67,36 @@ def run_query(query: str) -> None:
 @cli.command("run-query-from-file")
 @click.argument("file")
 @click.option("--show-output", is_flag=True, help="Show output of the query")
-def run_query_from_file(file: str, show_output: bool = False) -> None:
+@click.option(
+    "--export-csv",
+    is_flag=True,
+    help="Export the output to a CSV file",
+)
+def run_query_from_file(
+    file: str, show_output: bool = False, export_csv: bool = False
+) -> None:
     conn = get_db_connection()
     cur = conn.cursor()
     try:
         with open(file) as f:
             query = f.read()
             query = query.split(";")
-            for q in query:
+            no_queries = len(query) - 1
+            for i, q in enumerate(query):
                 if q.strip():
                     cur.execute(q + ";")
+                    columns = [desc[0] for desc in cur.description]
                     if check_ddl(q):
                         conn.commit()
                     if show_output:
                         results = cur.fetchall()
-                        print(tabulate(results, headers=[desc[0] for desc in cur.description], tablefmt="grid"))
+                        print(tabulate(results, headers=columns, tablefmt="grid"))
+                    # only export the reults of last query
+                    if export_csv and i == no_queries - 1:
+                        with open("output.csv", "w", newline="") as f:
+                            writer = csv.writer(f)
+                            writer.writerow(columns)
+                            writer.writerows(results)
         print(f"Query executed successfully.")
     except (Exception, psycopg2.DatabaseError) as e:
         print(f"Error executing query from file: {e}")

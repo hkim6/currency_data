@@ -11,5 +11,4 @@ resource "aws_db_instance" "default" {
 
   publicly_accessible = true
   vpc_security_group_ids = [aws_security_group.db_sg.id]
-  #db_subnet_group_name   = aws_db_subnet_group.rds_subnet_group.name
 }
