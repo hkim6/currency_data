@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     conn = get_db_connection()
     cur = conn.cursor()
     try:
-        with open("query1.sql") as f:
+        with open("lambda_query.sql") as f:
             query = f.read()
             query = query.split(";")
             for i, q in enumerate(query):
@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         if cur:
             cur.close()
     s3 = boto3.client("s3", region_name="us-east-2")
-    bucket_name = f"the-bucket-de-exercise"
+    bucket_name = f"the-bucket-currency-data-exercise"
     cur_time = datetime.now().isoformat()
 
     s3.put_object(

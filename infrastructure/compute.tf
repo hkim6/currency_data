@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "from_ecr" {
-  function_name = "de-exercise-lambda"
+  function_name = "currency-data-lambda"
   package_type  = "Image"
 
   architectures = ["arm64"]

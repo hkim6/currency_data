@@ -2,7 +2,7 @@ FROM public.ecr.aws/lambda/python:3.12
 
 RUN python -m pip install --upgrade pip
 
-COPY ./de_exercise_prt/ .
+COPY ./currency_data_exercise/ .
 COPY ./queries/ .
 COPY ./requirements.txt .
 
