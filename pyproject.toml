@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "currency-data-exercise"
+name = "currency-data"
 version = "0.0.1"
 description = ""
 authors = ["hk"]

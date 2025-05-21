@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         if cur:
             cur.close()
     s3 = boto3.client("s3", region_name="us-east-2")
-    bucket_name = f"the-bucket-currency-data-exercise"
+    bucket_name = f"the-bucket-currency-data"
     cur_time = datetime.now().isoformat()
 
     s3.put_object(

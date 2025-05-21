@@ -1,5 +1,5 @@
 resource "aws_security_group" "db_sg" {
-  name        = "currency-exercise-sg"
+  name        = "currency-data-sg"
   description = "Allow inbound access to RDS"
   vpc_id      = data.aws_vpc.default.id
 
