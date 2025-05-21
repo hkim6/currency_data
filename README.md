@@ -1,0 +1,1 @@
+Exercise using Terraform, AWS(RDS, S3, Lambda, VPC, ECR), Docker, Fixer API
